@@ -335,7 +335,7 @@ define Device/mikrotik_rbd52g-5hacd2hnd
 	DEVICE_DTS := qcom-ipq4018-rbd52g-5hacd2hnd
 	AUX_LOADER_UART := 1
 	DEVICE_TITLE := MikroTik RouterBOARD RBD52G-5HacD2HnD (hAP ac²)
-	DEVICE_PACKAGES += kmod-gpio-beeper -kmod-ath10k-ct -ath10k-firmware-qca4019-ct -wpad-basic
+	DEVICE_PACKAGES += kmod-gpio-beeper kmod-ath10k-ct ath10k-firmware-qca4019-ct
 endef
 TARGET_DEVICES += mikrotik_rbd52g-5hacd2hnd
 

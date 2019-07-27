@@ -252,4 +252,12 @@
 	status = "okay";
 };
 
+&wifi0 {
+        status = "okay";
+        qcom,ath10k-calibration-variant = "MikroTik-RBD52G-5HacD2HnD";
+};
 
+&wifi1 {
+        status = "okay";
+        qcom,ath10k-calibration-variant = "MikroTik-RBD52G-5HacD2HnD";
+};
