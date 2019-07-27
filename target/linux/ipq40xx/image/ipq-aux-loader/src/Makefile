@@ -56,7 +56,9 @@ endif
 endif
 
 #debug messages
-CFLAGS += -DDEBUG
+ifeq ($(DEBUG),true)
+  CFLAGS += -DDEBUG
+endif
 
 CFLAGS += -I./src/include
 
