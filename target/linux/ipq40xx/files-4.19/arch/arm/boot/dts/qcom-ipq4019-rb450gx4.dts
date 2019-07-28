@@ -26,30 +26,8 @@
 
 	memory {
 		device_type = "memory";
-		reg = <0x80000000 0x10000000>;
+		reg = <0x80000000 0x40000000>;
 	};
-
-	reserved-memory {
-		#address-cells = < 0x01 >;
-		#size-cells = < 0x01 >;
-		ranges;
-
-		rsvd1@87000000 {
-			reg = < 0x87000000 0x500000 >;
-			no-map;
-		};
-
-		wifi_dump@87500000 {
-			reg = < 0x87500000 0x600000 >;
-			no-map;
-		};
-
-		rsvd2@87B00000 {
-			reg = < 0x87b00000 0x500000 >;
-			no-map;
-		};
-	};
-
 
 	chosen {
 		stdout-path = "serial0:115200n8";
@@ -69,6 +47,8 @@
 
 		mdio@90000 {
 			status = "okay";
+			qcom,mdio_offset = <0x18>;
+			qcom,mdio_offset_limit = <0x5>;
 		};
 
 		ess-psgmii@98000 {
@@ -165,24 +145,34 @@
 &tlmm {
 	serial_pins: serial_pinmux {
 		mux {
-			pins = "gpio60", "gpio61";
+			pins = "gpio16", "gpio17";
 			function = "blsp_uart0";
 			bias-disable;
 		};
 	};
 
-	spi_0_pins: spi_0_pinmux {
-		pin {
+	spi_0_pins: spi-0-pinmux {
+		pinmux {
 			function = "blsp_spi0";
-			pins = "gpio54", "gpio55", "gpio56", "gpio57";
+			pins = "gpio13", "gpio14", "gpio15";
 			bias-disable;
 		};
-		pin_cs {
+
+		pinmux_cs {
 			function = "gpio";
-			pins = "gpio54";
+			pins = "gpio12";
 			bias-disable;
 			output-high;
 		};
+	};
+
+	nand_pins: nand-pins {
+		pins = "gpio53", "gpio55", "gpio56",
+				"gpio57", "gpio58", "gpio59",
+				"gpio60", "gpio62", "gpio63",
+				"gpio64", "gpio65", "gpio66",
+				"gpio67", "gpio68", "gpio69";
+		function = "qpic";
 	};
 };
 
@@ -193,7 +183,7 @@
 &blsp1_spi1 {
 	pinctrl-0 = <&spi_0_pins>;
 	pinctrl-names = "default";
-	cs-gpios = <&tlmm 54 GPIO_ACTIVE_HIGH>;
+	cs-gpios = <&tlmm 12 GPIO_ACTIVE_HIGH>;
 	status = "okay";
 
 	m25p80@0 {
@@ -241,15 +231,37 @@
 			};
 		};
 	};
-
 };
 
 &cryptobam {
 	status = "okay";
 };
 
+&nand {
+	pinctrl-0 = <&nand_pins>;
+	pinctrl-names = "default";
+	status = "okay";
+
+	nand@0 {
+		partitions {
+			compatible = "fixed-partitions";
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			partition0@0 {
+				label = "kernel";
+				reg = <0x00000000 0x1000000>;
+			};
+
+			partition1@1000000 {
+				label = "ubi";
+				reg = <0x1000000 0x1f000000>;
+			};
+		};
+	};
+};
+
 &qpic_bam {
 	status = "okay";
 };
-
 
