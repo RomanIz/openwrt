@@ -26,7 +26,8 @@
 
 	memory {
 		device_type = "memory";
-		reg = <0x80000000 0x10000000>;
+		/* The board has 128 MiB of RAM (but the FCC filing had 256 MiB) */
+		reg = <0x80000000 0x08000000>;
 	};
 
 	reserved-memory {
