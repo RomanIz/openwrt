@@ -30,18 +30,6 @@
 		reg = <0x80000000 0x08000000>;
 	};
 
-	reserved-memory {
-		#address-cells = < 0x01 >;
-		#size-cells = < 0x01 >;
-		ranges;
-
-		rsvd@87000000 {
-			reg = < 0x87000000 0xe00000 >;
-			no-map;
-		};
-	};
-
-
 	chosen {
 		stdout-path = "serial0:115200n8";
 	};
