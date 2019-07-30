@@ -111,10 +111,16 @@
 	keys {
 		compatible = "gpio-keys";
 
+		mode {
+			label = "mode";
+			gpios = <&tlmm 5 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_RFKILL>;
+		};
+
 		reset {
 			label = "reset";
-			gpios = <&tlmm 5 GPIO_ACTIVE_HIGH>;
-			linux,code = <KEY_RESTART >;
+			gpios = <&tlmm 63 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_RESTART>;
 		};
 	};
 
@@ -122,7 +128,7 @@
 		compatible = "gpio-leds";
 
 		power: power {
-			label = "rbd52g:blue:power";
+			label = "rbd52g:green:power";
 			gpios = <&tlmm 0 GPIO_ACTIVE_HIGH>;
 			default-state = "keep";
 			panic-indicator;
@@ -132,11 +138,6 @@
 			label = "rbd52g:green:user";
 			gpios = <&tlmm 3 GPIO_ACTIVE_HIGH>;
 		};
-	};
-
-	beeper: beeper {
-			compatible = "gpio-beeper";
-			gpios = <&tlmm 2 GPIO_ACTIVE_HIGH>;
 	};
 };
 
