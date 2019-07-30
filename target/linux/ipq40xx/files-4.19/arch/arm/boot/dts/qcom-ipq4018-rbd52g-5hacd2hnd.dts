@@ -219,6 +219,12 @@
 				label = "soft_config";
 				reg = <0x000bd000 0x01000>;
 			};
+
+			partition6@100000 {
+				compatible = "mikrotik,minor";
+				label = "firmware";
+				reg = <0x00100000 0xf00000>;
+			};
 		};
 	};
 
