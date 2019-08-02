@@ -95,6 +95,22 @@
 			status = "okay";
 		};
 
+		wifi@a000000 {
+			status = "okay";
+		};
+
+		wifi@a800000 {
+			status = "okay";
+		};
+
+		usb2@60f8800 {
+			status = "okay";
+		};
+
+		usb3@8af8800 {
+			status = "okay";
+		};
+
 		watchdog@b017000 {
 			status = "okay";
 		};
@@ -246,4 +262,16 @@
 &wifi1 {
         status = "okay";
         qcom,ath10k-calibration-variant = "MikroTik-RBD52G-5HacD2HnD";
+};
+
+&usb3_hs_phy {
+	status = "okay";
+};
+
+&usb3_ss_phy {
+        status = "okay";
+};
+
+&usb2_hs_phy {
+	status = "okay";
 };
